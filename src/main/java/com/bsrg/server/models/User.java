@@ -1,5 +1,6 @@
 package com.bsrg.server.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -14,11 +15,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-@Entity
+@Entity(name="apiUser")
 @Data
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @RequiredArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
+	
+	private static final long serialVersionUID = 1L; 
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

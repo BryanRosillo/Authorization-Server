@@ -9,7 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.bsrg.server.models.User;
 import com.bsrg.server.models.UserRepository;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages= {"com.bsrg.server.config"})
 public class AuthorizationServerApplication {
 
 	public static void main(String[] args) {
@@ -17,10 +18,10 @@ public class AuthorizationServerApplication {
 	}
 	
 	@Bean
-	public ApplicationRunner dataLoader(UserRepository userRepo, PasswordEncoder encoder) {
+	public ApplicationRunner dataLoader(UserRepository userRepo, PasswordEncoder passwordEncoder) {
 		return args ->{
-			userRepo.save(new User("admin01",encoder.encode("password"), "ROLE_ADMIN"));
-			userRepo.save(new User("admin02",encoder.encode("password"), "ROLE_ADMIN"));
+			userRepo.save(new User("admin01",passwordEncoder.encode("password"), "ROLE_ADMIN"));
+			userRepo.save(new User("admin02",passwordEncoder.encode("password"), "ROLE_ADMIN"));
 		};
 	}
 	
